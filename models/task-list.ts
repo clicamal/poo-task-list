@@ -1,7 +1,28 @@
 import { Task, TaskInterface } from "./task";
 
-export default class TaskList {
+export interface TaskListInterface {
+    title: string;
+}
+
+export class TaskList implements TaskListInterface {
+    private _title: string;
     private _tasks: Map<string, Task> = new Map<string, Task>();
+
+    constructor(title: string) {
+        this._title = title;
+    }
+
+    get title(): string {
+        return this._title;
+    }
+
+    set title(newTitle) {
+        const newTtlLn = newTitle.length;
+
+        if (newTtlLn < 4 || newTtlLn > 18) throw new Error("Título da lista deve ter entre 4 e 18 caracteres.");
+
+        this._title = newTitle;
+    }
 
     addTask(tskData: TaskInterface) {
         if (this._tasks.has(tskData.title)) throw new Error("Tarefa já existe na lista.");
