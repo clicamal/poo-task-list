@@ -1,8 +1,8 @@
-import { Task, TaskInterface } from "./task";
+import { Task, TaskInterface, TaskInterfacePart } from "./task";
 
 export interface TaskListInterface {
     title: string;
-}
+};
 
 export class TaskList implements TaskListInterface {
     private _title: string;
@@ -36,7 +36,7 @@ export class TaskList implements TaskListInterface {
         else return this._tasks.get(title);
     }
 
-    updateTask(title: string, newTskData: TaskInterface): void {
+    updateTask(title: string, newTskData: TaskInterfacePart): void {
         const task = this.getTask(title) as Task;
 
         Object.keys(newTskData).forEach(key => {

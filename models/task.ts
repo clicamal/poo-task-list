@@ -1,8 +1,9 @@
 export interface TaskInterface {
     title: string;
     description: string;
-    done: boolean;
-}
+};
+
+export type TaskInterfacePart = Partial<TaskInterface>;
 
 export class Task implements TaskInterface {
     private _title: string;
