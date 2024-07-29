@@ -9,6 +9,7 @@ export default class TaskList {
         this._tasks.set(tskData.title, new Task(tskData.title, tskData.description));
     }
 
+    // Resultado pode ser usado com 'as Task' de forma segura. Pois ou retorna Task ou atira um erro.
     getTask(title: string): Task | undefined {
         if (!this._tasks.has(title)) throw new Error("Tarefa não existe na lista.");
         else return this._tasks.get(title);
