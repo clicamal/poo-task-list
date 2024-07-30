@@ -26,4 +26,3 @@
 
 ### Geral
 - [x] **Como usuário**, quero que a aplicação seja fácil de usar e intuitiva, para que eu possa rapidamente adicionar, visualizar e gerenciar minhas tarefas e listas.
-- [x] **Como usuário**, quero que minhas tarefas e listas sejam salvas automaticamente, para não perder nenhuma informação importante.
