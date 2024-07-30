@@ -21,6 +21,11 @@ export default class TaskListManager {
         Object.keys(newTskLData).forEach(key => {
             taskList[key] = newTskLData[key];
         });
+
+        if (newTskLData.title) {
+            this.deleteTaskList(title);
+            this.addTaskList({ title: newTskLData.title });
+        }
     }
 
     deleteTaskList(title: string): void {

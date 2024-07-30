@@ -35,6 +35,8 @@ export class Task implements TaskInterface {
         const newDescLn = newDesc.length;
 
         if (newDescLn > 250) throw new Error("Descrição deve ter no máximo 250 caracteres.");
+
+        this._description = newDesc;
     }
 
     get done(): boolean {

@@ -42,6 +42,11 @@ export class TaskList implements TaskListInterface {
         Object.keys(newTskData).forEach(key => {
             task[key] = newTskData[key];
         });
+
+        if (newTskData.title) {
+            this.deleteTask(title);
+            this.addTask({ title: newTskData.title, description: newTskData.description || "" });
+        }
     }
 
     deleteTask(title: string): void {
