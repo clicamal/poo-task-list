@@ -1,5 +1,5 @@
 import { TaskListInterface } from "../models/task-list";
-import TaskListManager from "../models/task-list-manager"; // Certifique-se de ajustar o caminho conforme necessário
+import TaskListManager from "../models/task-list-manager";
 
 describe("TaskListManager", () => {
     let taskListManager: TaskListManager;

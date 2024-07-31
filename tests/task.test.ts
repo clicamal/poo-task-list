@@ -1,5 +1,4 @@
-import { Task } from "../models/task"; // Certifique-se de ajustar o caminho conforme necessário
-
+import { Task } from "../models/task";
 describe("Task", () => {
     let task: Task;
 

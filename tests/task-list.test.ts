@@ -1,6 +1,5 @@
 import { TaskInterface, TaskInterfacePart } from "../models/task";
-import { TaskList } from "../models/task-list"; // Certifique-se de ajustar o caminho conforme necessário
-
+import { TaskList } from "../models/task-list";
 describe("TaskList", () => {
     let taskList: TaskList;
 
