@@ -24,7 +24,7 @@ export class TaskList implements TaskListInterface {
         this._title = newTitle;
     }
 
-    addTask(tskData: TaskInterface) {
+    addTask(tskData: TaskInterface): void {
         if (this._tasks.has(tskData.title)) throw new Error("Tarefa já existe na lista.");
 
         this._tasks.set(tskData.title, new Task(tskData.title, tskData.description));
@@ -34,6 +34,10 @@ export class TaskList implements TaskListInterface {
     getTask(title: string): Task | undefined {
         if (!this._tasks.has(title)) throw new Error("Tarefa não existe na lista.");
         else return this._tasks.get(title);
+    }
+
+    getAllTaskTitles(): string[] {
+        return Array.from(this._tasks.keys());
     }
 
     updateTask(title: string, newTskData: TaskInterfacePart): void {

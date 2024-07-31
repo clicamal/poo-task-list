@@ -15,6 +15,10 @@ export default class TaskListManager {
         else return this._taskLists.get(title);
     }
 
+    getAllTaskListTitles(): string[] {
+        return Array.from(this._taskLists.keys());
+    }
+
     updateTaskList(title: string, newTskLData: TaskListInterface): void {
         const taskList = this.getTaskList(title) as TaskList;
 
