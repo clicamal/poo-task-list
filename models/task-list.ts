@@ -1,14 +1,16 @@
+import CRUD from "./crud";
+import HasTitle from "./interfaces/has-title";
 import { Task, TaskInterface, TaskInterfacePart } from "./task";
 
-export interface TaskListInterface {
+export interface TaskListInterface extends HasTitle {
     title: string;
 };
 
-export class TaskList implements TaskListInterface {
+export class TaskList extends CRUD<Task, TaskInterface, TaskInterfacePart> implements TaskListInterface {
     private _title: string;
-    private _tasks: Map<string, Task> = new Map<string, Task>();
 
     constructor(title: string) {
+        super();
         this._title = title;
     }
 
@@ -24,36 +26,22 @@ export class TaskList implements TaskListInterface {
         this._title = newTitle;
     }
 
-    addTask(tskData: TaskInterface): void {
-        if (this._tasks.has(tskData.title)) throw new Error("Tarefa já existe na lista.");
+    addObj(tskData: TaskInterface): void {
+        if (this._data.has(tskData.title)) throw new Error("Tarefa já existe na lista.");
 
-        this._tasks.set(tskData.title, new Task(tskData.title, tskData.description));
+        this._data.set(tskData.title, new Task(tskData.title, tskData.description));
     }
 
-    // Resultado pode ser usado com 'as Task' de forma segura. Pois ou retorna Task ou atira um erro.
-    getTask(title: string): Task | undefined {
-        if (!this._tasks.has(title)) throw new Error("Tarefa não existe na lista.");
-        else return this._tasks.get(title);
-    }
-
-    getAllTaskTitles(): string[] {
-        return Array.from(this._tasks.keys());
-    }
-
-    updateTask(title: string, newTskData: TaskInterfacePart): void {
-        const task = this.getTask(title) as Task;
+    updateObj(title: string, newTskData: TaskInterfacePart): void {
+        const task = this.getObj(title) as Task;
 
         Object.keys(newTskData).forEach(key => {
             task[key] = newTskData[key];
         });
 
         if (newTskData.title) {
-            this.deleteTask(title);
-            this.addTask({ title: newTskData.title, description: newTskData.description || "" });
+            this.deleteObj(title);
+            this.addObj({ title: newTskData.title, description: newTskData.description || "" });
         }
-    }
-
-    deleteTask(title: string): void {
-        this._tasks.delete((this.getTask(title) as Task).title);
     }
 }

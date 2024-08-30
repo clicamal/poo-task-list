@@ -30,23 +30,23 @@ describe("TaskList", () => {
 
     test("deve adicionar uma nova tarefa à lista", () => {
         const taskData: TaskInterface = { title: "Nova Tarefa", description: "Descrição da tarefa" };
-        taskList.addTask(taskData);
-        expect(taskList.getTask("Nova Tarefa")?.title).toBe("Nova Tarefa");
-        expect(taskList.getTask("Nova Tarefa")?.description).toBe("Descrição da tarefa");
+        taskList.addObj(taskData);
+        expect(taskList.getObj("Nova Tarefa")?.title).toBe("Nova Tarefa");
+        expect(taskList.getObj("Nova Tarefa")?.description).toBe("Descrição da tarefa");
     });
 
     test("deve lançar um erro ao adicionar uma tarefa que já existe na lista", () => {
         const taskData: TaskInterface = { title: "Tarefa Existente", description: "Descrição da tarefa" };
-        taskList.addTask(taskData);
+        taskList.addObj(taskData);
         expect(() => {
-            taskList.addTask(taskData);
+            taskList.addObj(taskData);
         }).toThrow("Tarefa já existe na lista.");
     });
 
     test("deve lançar um erro ao tentar obter uma tarefa que não existe na lista", () => {
         expect(() => {
-            taskList.getTask("Tarefa Inexistente");
-        }).toThrow("Tarefa não existe na lista.");
+            taskList.getObj("Tarefa Inexistente");
+        }).toThrow("Objeto não existe.");
     });
 
     test("deve retornar todos os títulos de tarefas", () => {
@@ -54,28 +54,28 @@ describe("TaskList", () => {
         const task2: TaskInterface = { title: "Tarefa 2", description: "Descrição 2" };
         const task3: TaskInterface = { title: "Tarefa 3", description: "Descrição 3" };
 
-        taskList.addTask(task1);
-        taskList.addTask(task2);
-        taskList.addTask(task3);
+        taskList.addObj(task1);
+        taskList.addObj(task2);
+        taskList.addObj(task3);
 
-        const taskTitles = taskList.getAllTaskTitles();
+        const taskTitles = taskList.getAllTitles();
         expect(taskTitles).toEqual(["Tarefa 1", "Tarefa 2", "Tarefa 3"]);
     });
 
     test("deve atualizar uma tarefa existente na lista", () => {
         const taskData: TaskInterface = { title: "Tarefa para Atualizar", description: "Descrição original" };
-        taskList.addTask(taskData);
+        taskList.addObj(taskData);
         const newTaskData: TaskInterfacePart = { description: "Nova descrição" };
-        taskList.updateTask("Tarefa para Atualizar", newTaskData);
-        expect(taskList.getTask("Tarefa para Atualizar")?.description).toBe("Nova descrição");
+        taskList.updateObj("Tarefa para Atualizar", newTaskData);
+        expect(taskList.getObj("Tarefa para Atualizar")?.description).toBe("Nova descrição");
     });
 
     test("deve deletar uma tarefa existente na lista", () => {
         const taskData: TaskInterface = { title: "Tarefa para Deletar", description: "Descrição da tarefa" };
-        taskList.addTask(taskData);
-        taskList.deleteTask("Tarefa para Deletar");
+        taskList.addObj(taskData);
+        taskList.deleteObj("Tarefa para Deletar");
         expect(() => {
-            taskList.getTask("Tarefa para Deletar");
-        }).toThrow("Tarefa não existe na lista.");
+            taskList.getObj("Tarefa para Deletar");
+        }).toThrow("Objeto não existe.");
     });
 });

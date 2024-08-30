@@ -10,22 +10,22 @@ describe("TaskListManager", () => {
 
     test("deve adicionar uma nova lista de tarefas", () => {
         const taskListData: TaskListInterface = { title: "Nova Lista" };
-        taskListManager.addTaskList(taskListData);
-        expect(taskListManager.getTaskList("Nova Lista")?.title).toBe("Nova Lista");
+        taskListManager.addObj(taskListData);
+        expect(taskListManager.getObj("Nova Lista")?.title).toBe("Nova Lista");
     });
 
     test("deve lançar um erro ao adicionar uma lista de tarefas que já existe", () => {
         const taskListData: TaskListInterface = { title: "Lista Existente" };
-        taskListManager.addTaskList(taskListData);
+        taskListManager.addObj(taskListData);
         expect(() => {
-            taskListManager.addTaskList(taskListData);
+            taskListManager.addObj(taskListData);
         }).toThrow("Lista já existe.");
     });
 
     test("deve lançar um erro ao tentar obter uma lista de tarefas que não existe", () => {
         expect(() => {
-            taskListManager.getTaskList("Lista Inexistente");
-        }).toThrow("Lista não existe.");
+            taskListManager.getObj("Lista Inexistente");
+        }).toThrow("Objeto não existe.");
     });
 
     test("deve retornar todos os títulos de tarefas", () => {
@@ -33,28 +33,28 @@ describe("TaskListManager", () => {
         const taskList2: TaskListInterface = { title: "Lista 2" };
         const taskList3: TaskListInterface = { title: "Lista 3" };
 
-        taskListManager.addTaskList(taskList1);
-        taskListManager.addTaskList(taskList2);
-        taskListManager.addTaskList(taskList3);
+        taskListManager.addObj(taskList1);
+        taskListManager.addObj(taskList2);
+        taskListManager.addObj(taskList3);
 
-        const taskListTitles = taskListManager.getAllTaskListTitles();
+        const taskListTitles = taskListManager.getAllTitles();
         expect(taskListTitles).toEqual(["Lista 1", "Lista 2", "Lista 3"]);
     });
 
     test("deve atualizar uma lista de tarefas existente", () => {
         const taskListData: TaskListInterface = { title: "Lista para Atualizar" };
-        taskListManager.addTaskList(taskListData);
+        taskListManager.addObj(taskListData);
         const newTaskListData: TaskListInterface = { title: "Lista Atualizada" };
-        taskListManager.updateTaskList("Lista para Atualizar", newTaskListData);
-        expect(taskListManager.getTaskList("Lista Atualizada")?.title).toBe("Lista Atualizada");
+        taskListManager.updateObj("Lista para Atualizar", newTaskListData);
+        expect(taskListManager.getObj("Lista Atualizada")?.title).toBe("Lista Atualizada");
     });
 
     test("deve deletar uma lista de tarefas existente", () => {
         const taskListData: TaskListInterface = { title: "Lista para Deletar" };
-        taskListManager.addTaskList(taskListData);
-        taskListManager.deleteTaskList("Lista para Deletar");
+        taskListManager.addObj(taskListData);
+        taskListManager.deleteObj("Lista para Deletar");
         expect(() => {
-            taskListManager.getTaskList("Lista para Deletar");
-        }).toThrow("Lista não existe.");
+            taskListManager.getObj("Lista para Deletar");
+        }).toThrow("Objeto não existe.");
     });
 });

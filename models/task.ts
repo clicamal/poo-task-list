@@ -1,4 +1,6 @@
-export interface TaskInterface {
+import HasTitle from "./interfaces/has-title";
+
+export interface TaskInterface extends HasTitle {
     title: string;
     description: string;
 };
